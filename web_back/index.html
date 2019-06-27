@@ -102,17 +102,29 @@
            }
         }
         $('#tiao').on('click',function(e){
-            e.preventDefault();
+            e.preventDefault();  
             $.ajax({
                 type:'post',
                 url:'http://localhost:8000/admin/logout',
                 success:function(backdata){
                     if(backdata.code == 200) {
                         window.location.href = './login.html';
+                        //其实他很运气了，帮他的人不少。但是那种感觉很奇怪……并不是幸福，没有任何帮助给他带来幸福，
+                        //只是维持他在孤独边缘的脆弱平衡。好像他是这个世界的孩子，谁也不敢叫他真正绝望。
+                        //每当他即将堕入悲伤的深渊时，总有人施舍似的给他一点点安慰让他能坚持住。
+                        //我有种奇怪的感觉……当他真正绝望的那一天，他会变成……”酒德麻衣轻声说，“魔鬼那样的东西！” 
                     }
                 }
             })
             
+        });
+        $.ajax({
+            url:'http://localhost:8000/admin/getuser',
+            success:function(backdata){
+                $('.user_info img').attr('src',backdata.data.user_pic);
+                $('.user_info span').html('欢迎&nbsp;&nbsp;'+backdata.data.nickname);
+                $('.user_center_link img').attr('src',backdata.data.user_pic);
+            }
         })
     </script>
    
